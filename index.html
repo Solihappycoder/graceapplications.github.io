@@ -6,19 +6,16 @@
 <title>Team Applications</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-body { font-family: 'Gotham', 'Inter'; }
+  body { font-family: 'Gotham', 'Inter'; }
 </style>
 </head>
-<body class="bg-gray-100 min-h-screen py-10">
-
-
-<div class="max-w-4xl mx-auto bg-white rounded-xl shadow p-6">
-<div class="flex justify-center mb-6">
-<img src="logo.png" alt="Organisation Logo" class="h-16 object-contain" />
-</div>
-
-
-<h1 class="text-2xl font-bold text-center mb-4">Team Application Status</h1>
+  <body class="bg-gray-100 min-h-screen py-10">
+    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow p-6">
+      <div class="flex justify-center mb-6">
+        <img src="logo.png" alt="Organisation Logo" class="h-16 object-contain" />
+    </div>
+    
+      <h1 class="text-2xl font-bold text-center mb-4">Team Application Status</h1>
 
 
 <!-- Notices Section -->
@@ -38,9 +35,8 @@ APPLY NOW
 </div>
 </div>
 
-
 <script>
-const teams = [
+document.addEventListener("DOMContentLoaded", () => {
 {
 name: "Guest Experience",
 leaders: ["Jorden", "Carol"],
@@ -80,33 +76,30 @@ status: "Closed"
 },
 ];
 
+  const container = document.getElementById("teams");
 
-const container = document.getElementById('teams');
+  teams.forEach(team => {
+    const statusColor =
+      team.status === "Open" ? "bg-green-100 text-green-700" :
+      team.status === "Closed" ? "bg-red-100 text-red-700" :
+      "bg-yellow-100 text-yellow-700";
 
+    const requirementsHTML = team.requirements
+      ? `<p class="text-sm text-gray-600"><strong>Requirements:</strong> ${team.requirements}</p>`
+      : "";
 
-teams.forEach(team => {
-const statusColor = team.status === 'Open'
-? 'bg-green-100 text-green-700'
-: team.status === 'Closed'
-? 'bg-red-100 text-red-700'
-: 'bg-yellow-100 text-yellow-700';
-
-
-const requirementsHTML = team.requirements
-? `<p class=\"text-sm text-gray-600\"><strong>Requirements:</strong> ${team.requirements}</p>`
-: '';
-
-
-container.innerHTML += `
-<div class=\"border rounded-lg p-4 flex justify-between items-start\">
-<div>
-<h2 class=\"text-lg font-semibold\">${team.name}</h2>
-<p class=\"text-sm text-gray-600 mt-1\"><strong>Leaders:</strong> ${team.leaders.join(', ')}</p>
-<p class=\"text-sm text-gray-600\"><strong>Description:</strong> ${team.description}</p>
-${requirementsHTML}
-</div>
-<span class=\"px-4 py-1 rounded-full text-sm ${statusColor}\">${team.status}</span>
-</div>
-`;
+    container.innerHTML += `
+      <div class="border rounded-lg p-4 flex justify-between items-start">
+        <div>
+          <h2 class="text-lg font-semibold">${team.name}</h2>
+          <p class="text-sm text-gray-600 mt-1"><strong>Leaders:</strong> ${team.leaders.join(", ")}</p>
+          <p class="text-sm text-gray-600"><strong>Description:</strong> ${team.description}</p>
+          ${requirementsHTML}
+        </div>
+        <span class="px-4 py-1 rounded-full text-sm ${statusColor}">${team.status}</span>
+      </div>
+    `;
+  });
 });
-</html>
+</script>
+
